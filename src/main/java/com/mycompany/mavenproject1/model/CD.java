@@ -12,8 +12,12 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.MappedSuperclass;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -34,9 +38,19 @@ public class CD {
     private String description;
     private String isbn;
     private Instant instant = Instant.now();
+   @ManyToMany(mappedBy = "cds") //ce many permet d'enlever la table cd_artist dans la base
+   private List<Artist> artists = new ArrayList<>();
    
       @ElementCollection
     private Map<Integer, String> tracks = new HashMap<>();
+      
+    public List<Artist> getArtists() {
+        return artists;
+    }
+
+    public void setArtists(List<Artist> artists) {
+        this.artists = artists;
+    }
      
     public Map<Integer, String> getTracks() {
         return tracks;

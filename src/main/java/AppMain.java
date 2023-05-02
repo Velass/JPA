@@ -1,6 +1,7 @@
 
 import com.mycompany.mavenproject1.model.Address;
 import com.mycompany.mavenproject1.model.Address2;
+import com.mycompany.mavenproject1.model.Artist;
 import com.mycompany.mavenproject1.model.Book;
 import com.mycompany.mavenproject1.model.BookCategory;
 import com.mycompany.mavenproject1.model.CD;
@@ -40,12 +41,23 @@ public class AppMain {
         b.getTags().add("Cerveau");
         b.getTags().add("lecture");
         b.getTags().add("habitude");
+        
         CD cd = new CD();
         cd.setTitle("test1");
         cd.setPrice(10F);
         cd.setDescription("unedescribe");
         cd.getTracks().put(1,"test");
         cd.getTracks().put(2,"test2");
+         CD cd2 = new CD();
+        cd2.setTitle("test2");
+        cd2.setPrice(20F);
+        cd2.setDescription("unedescribetest");
+        Artist artist = new Artist();
+        artist.setFirstName("test");
+        cd.getArtists().add(artist);
+        artist.getCds().add(cd2);
+        
+        
         Address address = new Address();
         address.setCity("Montpellier");
         address.setCountry("France");
@@ -53,6 +65,8 @@ public class AppMain {
         customer.setEmail("test@test");
         customer.setFirstName("test");
         customer.setAddress(address);
+        
+        
         Address2 address1 = new Address2();
         address1.setCity("Montpellier");
         address1.setCountry("France");
@@ -81,9 +95,11 @@ public class AppMain {
         em.persist(address1);
         em.persist(customer2);
         em.persist(customer);
+        em.persist(artist);
          em.persist(purchaseOrder);
          em.persist(orderLine);
          em.persist(orderLine2);
+         em.persist(cd2);
         em.persist(cd);
         
         em.getTransaction().commit();
