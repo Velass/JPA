@@ -7,6 +7,8 @@ import com.mycompany.mavenproject1.model.CD;
 import com.mycompany.mavenproject1.model.Customer;
 import com.mycompany.mavenproject1.model.Customer2;
 import com.mycompany.mavenproject1.model.JPAUtils;
+import com.mycompany.mavenproject1.model.OrderLine;
+import com.mycompany.mavenproject1.model.PurchaseOrder;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Enumerated;
 
@@ -58,6 +60,13 @@ public class AppMain {
         customer2.setEmail("test@test");
         customer2.setFirstName("test");
         customer2.setAddress(address1);
+        OrderLine orderLine = new OrderLine();
+        orderLine.setItem("test");
+        orderLine.setUnitPrice(10.00);
+        orderLine.setQuantity(10);
+        PurchaseOrder purchaseOrder = new PurchaseOrder();
+        purchaseOrder.getOrderLines().add(orderLine);
+        
         
         // entre .begin et .commit tout va persister et grace a ca il y aura la ligne dans la base de données
 
@@ -67,6 +76,8 @@ public class AppMain {
         em.persist(address1);
         em.persist(customer2);
         em.persist(customer);
+        // em.persist(purchaseOrder);
+         em.persist(orderLine);
         em.persist(cd);
         
         em.getTransaction().commit();
