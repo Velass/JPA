@@ -64,8 +64,13 @@ public class AppMain {
         orderLine.setItem("test");
         orderLine.setUnitPrice(10.00);
         orderLine.setQuantity(10);
+        OrderLine orderLine2 = new OrderLine();
+        orderLine2.setItem("test2");
+        orderLine2.setUnitPrice(10.00);
+        orderLine2.setQuantity(10);
         PurchaseOrder purchaseOrder = new PurchaseOrder();
         purchaseOrder.getOrderLines().add(orderLine);
+          purchaseOrder.getOrderLines().add(orderLine2);
         
         
         // entre .begin et .commit tout va persister et grace a ca il y aura la ligne dans la base de données
@@ -76,8 +81,9 @@ public class AppMain {
         em.persist(address1);
         em.persist(customer2);
         em.persist(customer);
-        // em.persist(purchaseOrder);
+         em.persist(purchaseOrder);
          em.persist(orderLine);
+         em.persist(orderLine2);
         em.persist(cd);
         
         em.getTransaction().commit();

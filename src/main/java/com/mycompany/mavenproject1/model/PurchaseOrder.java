@@ -4,9 +4,11 @@
  */
 package com.mycompany.mavenproject1.model;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,11 +17,13 @@ import java.util.List;
  *
  * @author pc
  */
+@Entity
 public class PurchaseOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @OneToMany
+    @JoinColumn(name = "purchaseOrder_id")
     List<OrderLine> orderLines = new ArrayList<>();
 
     @Override
