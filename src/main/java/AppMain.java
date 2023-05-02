@@ -57,16 +57,16 @@ public class AppMain {
         Customer2 customer2 = new Customer2();
         customer2.setEmail("test@test");
         customer2.setFirstName("test");
+        customer2.setAddress(address1);
         
         // entre .begin et .commit tout va persister et grace a ca il y aura la ligne dans la base de données
 
         em.getTransaction().begin();
         em.persist(b);
         em.persist(b1);
-         em.persist(address1);
+        em.persist(address1);
         em.persist(customer2);
-       
-         em.persist(customer);
+        em.persist(customer);
         em.persist(cd);
         
         em.getTransaction().commit();
