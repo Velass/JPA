@@ -24,15 +24,10 @@ import java.util.UUID;
  * @author pc
  */
 @Entity
-public class Book {
+public class Book extends Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(length = 200, nullable = false)
-    private String title;
-    private Float price;
-    private String description;
     private String isbn;
     private Integer nbOfPages;
     private Boolean illustrations;
