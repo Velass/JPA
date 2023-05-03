@@ -9,6 +9,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
 
 
 
@@ -17,6 +19,12 @@ import jakarta.persistence.Id;
  * @author pc
  */
 @Entity
+@NamedQueries({
+    @NamedQuery(name = "customerfindByCity", query = "SELECT c FROM Customer c WHERE c.address.city = :city"),
+    @NamedQuery(name = "customerfindByZipode", query = "SELECT c FROM Customer c WHERE c.address.zipcode = :zipcode"),
+    
+})
+
 
 public class Customer {
     @Id

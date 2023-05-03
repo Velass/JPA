@@ -43,14 +43,14 @@ public class AppMain {
         b.getTags().add("Cerveau");
         b.getTags().add("lecture");
         b.getTags().add("habitude");
-        
+
         CD cd = new CD();
         cd.setTitle("test1");
         cd.setPrice(10F);
         cd.setDescription("unedescribe");
-        cd.getTracks().put(1,"test");
-        cd.getTracks().put(2,"test2");
-         CD cd2 = new CD();
+        cd.getTracks().put(1, "test");
+        cd.getTracks().put(2, "test2");
+        CD cd2 = new CD();
         cd2.setTitle("test2");
         cd2.setPrice(20F);
         cd2.setDescription("unedescribetest");
@@ -58,17 +58,16 @@ public class AppMain {
         artist.setFirstName("test");
         cd.getArtists().add(artist);
         artist.getCds().add(cd2);
-        
-        
+
         Address address = new Address();
         address.setCity("Montpellier");
         address.setCountry("France");
+        address.setZipcode("test");
         Customer customer = new Customer();
         customer.setEmail("test@test");
         customer.setFirstName("test");
         customer.setAddress(address);
-        
-        
+
         Address2 address1 = new Address2();
         address1.setCity("Montpellier");
         address1.setCountry("France");
@@ -86,11 +85,9 @@ public class AppMain {
         orderLine2.setQuantity(10);
         PurchaseOrder purchaseOrder = new PurchaseOrder();
         purchaseOrder.getOrderLines().add(orderLine);
-          purchaseOrder.getOrderLines().add(orderLine2);
-        
-        
-        // entre .begin et .commit tout va persister et grace a ca il y aura la ligne dans la base de données
+        purchaseOrder.getOrderLines().add(orderLine2);
 
+        // entre .begin et .commit tout va persister et grace a ca il y aura la ligne dans la base de données
         em.getTransaction().begin();
         em.persist(b);
         em.persist(b1);
@@ -98,22 +95,32 @@ public class AppMain {
         em.persist(customer2);
         em.persist(customer);
         em.persist(artist);
-         em.persist(purchaseOrder);
-         em.persist(orderLine);
-         em.persist(orderLine2);
-         em.persist(cd2);
+        em.persist(purchaseOrder);
+        em.persist(orderLine);
+        em.persist(orderLine2);
+        em.persist(cd2);
         em.persist(cd);
-        
+
         em.getTransaction().commit();
 
-        TypedQuery<Customer> typedQuery =em.createQuery("SELECT c FROM Customer c WHERE c.address.city = :city", Customer.class);
-        typedQuery.setParameter("city", "Montpellier");
-        List<Customer> customers = typedQuery.getResultList();
-        
-        for(Customer customer1 : customers){
-            System.out.println("customer id :  " + customer1.getId());   
-            System.out.println("customer Firstname :  " + customer1.getFirstName()); 
+        TypedQuery<Customer> findCustomerByCity = em.createNamedQuery("customerfindByCity", Customer.class);
+        findCustomerByCity.setParameter("city", "Montpellier");
+        List<Customer> customers = findCustomerByCity.getResultList();
+        for (Customer customer1 : customers) {
+            System.out.println("customer :  " + customer1.toString());
+
         }
+
+        TypedQuery<Customer> customerfindByZipode = em.createNamedQuery("customerfindByZipode", Customer.class);
+        customerfindByZipode.setParameter("zipcode", "Montpellier");
+        List<Customer> customers1 = customerfindByZipode.getResultList();
+        for (Customer customer1 : customers1) {
+            System.out.println("customer :  " + customer1.toString());
+
+        }
+        
+        
+        
         
         Book b2 = em.find(Book.class, 1);
         if (b2 == null) {
