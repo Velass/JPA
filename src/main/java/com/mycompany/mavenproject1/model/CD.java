@@ -14,7 +14,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.MappedSuperclass;
-import jakarta.persistence.Transient;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,9 +28,14 @@ import java.util.Map;
  */
 @Entity
 public class CD extends Item{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    //@Id
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@Column(length = 200, nullable = false)
+    //private Long id;
+
+    //private String title;
+    //private Float price;
+    //private String description;
     private String isbn;
     private Instant instant = Instant.now();
    @ManyToMany(mappedBy = "cds") //ce many permet d'enlever la table cd_artist dans la base

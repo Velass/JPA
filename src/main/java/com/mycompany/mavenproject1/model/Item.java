@@ -20,13 +20,13 @@ import jakarta.persistence.Transient;
  * @author pc
  */
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn(name = "type")
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+//@DiscriminatorColumn(name = "type")
 public abstract class Item {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(length = 200, nullable = false)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    //@Column(length = 200, nullable = false)
+    Long id;
     String title ;
     String description ;
     Float price;

@@ -25,9 +25,14 @@ import java.util.UUID;
  */
 @Entity
 public class Book extends Item {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    //@Id
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@Column(length = 200, nullable = false)
+    //private Long id;
+
+    //private String title;
+    //private Float price;
+    //private String description;
     private String isbn;
     private Integer nbOfPages;
     private Boolean illustrations;
@@ -61,14 +66,6 @@ public class Book extends Item {
 
     public void setInstant(Instant instant) {
         this.instant = instant;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getTitle() {
