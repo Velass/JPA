@@ -17,6 +17,7 @@ import jakarta.persistence.Id;
  * @author pc
  */
 @Entity
+
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

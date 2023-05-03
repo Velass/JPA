@@ -12,6 +12,8 @@ import com.mycompany.mavenproject1.model.OrderLine;
 import com.mycompany.mavenproject1.model.PurchaseOrder;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.TypedQuery;
+import java.util.List;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -104,6 +106,15 @@ public class AppMain {
         
         em.getTransaction().commit();
 
+        TypedQuery<Customer> typedQuery =em.createQuery("SELECT c FROM Customer c WHERE c.address.city = :city", Customer.class);
+        typedQuery.setParameter("city", "Montpellier");
+        List<Customer> customers = typedQuery.getResultList();
+        
+        for(Customer customer1 : customers){
+            System.out.println("customer id :  " + customer1.getId());   
+            System.out.println("customer Firstname :  " + customer1.getFirstName()); 
+        }
+        
         Book b2 = em.find(Book.class, 1);
         if (b2 == null) {
             System.out.println("on trouve pas le bouquin");
