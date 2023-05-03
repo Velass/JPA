@@ -20,7 +20,7 @@ import jakarta.persistence.Transient;
  * @author pc
  */
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "type")
 public abstract class Item {
     @Id
